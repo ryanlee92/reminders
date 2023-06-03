@@ -7,10 +7,10 @@ class Reminders {
 
     init() {
         defaultList = eventStore.defaultCalendarForNewReminders()
-        eventStore.requestAccess(to: EKEntityType.reminder, completion: {(granted, error) in 
-            if let error = error { print(error) }
-            self.hasAccess = granted ? true : false
-            })
+//         eventStore.requestAccess(to: EKEntityType.reminder, completion: {(granted, error) in 
+//             if let error = error { print(error) }
+//             self.hasAccess = granted ? true : false
+//             })
     }
 
     func getDefaultList() -> String? {
