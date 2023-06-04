@@ -9,12 +9,11 @@ class Reminders {
         defaultList = eventStore.defaultCalendarForNewReminders()
     }
     
-    func initialize() -> String? {
+    func initialize() {
         eventStore.requestAccess(to: EKEntityType.reminder, completion: {(granted, error) in 
             if let error = error { print(error) }
             self.hasAccess = granted ? true : false
         })
-        return nil
     }
 
     func getDefaultList() -> String? {
