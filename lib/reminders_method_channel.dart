@@ -12,6 +12,11 @@ class MethodChannelReminders extends RemindersPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
   final methodChannel = const MethodChannel('reminders');
+  
+  @override
+  Future<void> initialize() async {
+    await methodChannel.invokeMethod('initialize');
+  }
 
   @override
   Future<String?> getPlatformVersion() async {
