@@ -24,6 +24,10 @@ abstract class RemindersPlatform extends PlatformInterface {
     PlatformInterface.verifyToken(instance, _token);
     _instance = instance;
   }
+  
+  Future<void> initialize() async {
+    throw UnimplementedError('intialize() has not been implemented.');
+  }
 
   Future<String?> getPlatformVersion() async {
     throw UnimplementedError('platformVersion() has not been implemented.');
