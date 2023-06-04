@@ -25,7 +25,7 @@ abstract class RemindersPlatform extends PlatformInterface {
     _instance = instance;
   }
   
-  Future<void> initialize() async {
+  Future<String?> initialize() async {
     throw UnimplementedError('intialize() has not been implemented.');
   }
 
