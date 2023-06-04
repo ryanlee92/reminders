@@ -9,6 +9,10 @@ class Reminders {
   Future<String?> getPlatformVersion() {
     return RemindersPlatform.instance.getPlatformVersion();
   }
+  
+  Future<void> initialize() {
+    return RemindersPlatform.instance.initialize();
+  }
 
   Future<bool> hasAccess() async {
     return RemindersPlatform.instance.hasAccess();
