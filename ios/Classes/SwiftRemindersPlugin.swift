@@ -15,7 +15,10 @@ public class SwiftRemindersPlugin: NSObject, FlutterPlugin {
 
       case "getPlatformVersion":
         result("iOS " + UIDevice.current.systemVersion)
-
+      
+      case "initialized":
+        result(self.reminders.initialized())
+      
       case "hasAccess":
         result(self.reminders.hasAccess)
 
