@@ -7,7 +7,6 @@ class Reminders {
 
     init() {
         defaultList = eventStore.defaultCalendarForNewReminders()
-
     }
     
     func initialize() {
