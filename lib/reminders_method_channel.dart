@@ -20,7 +20,7 @@ class MethodChannelReminders extends RemindersPlatform {
   }
 
   @override
-  Future<String?> getPlatformVersion() async {
+  Future<void> getPlatformVersion() async {
     final version =
         await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
