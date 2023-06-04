@@ -14,13 +14,12 @@ class MethodChannelReminders extends RemindersPlatform {
   final methodChannel = const MethodChannel('reminders');
   
   @override
-  Future<String?> initialize() async {
+  Future<void> initialize() async {
     await methodChannel.invokeMethod('initialize');
-    return nil;
   }
 
   @override
-  Future<void> getPlatformVersion() async {
+  Future<String?> getPlatformVersion() async {
     final version =
         await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
