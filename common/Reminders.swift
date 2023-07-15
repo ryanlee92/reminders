@@ -7,14 +7,14 @@ class Reminders {
 
     init() {
         defaultList = eventStore.defaultCalendarForNewReminders()
-
     }
-    
-    func initialize() {
-        eventStore.requestAccess(to: EKEntityType.reminder, completion: {(granted, error) in 
+
+    func initialize() -> String? {
+        eventStore.requestAccess(to: EKEntityType.reminder, completion: {(granted, error) in
             if let error = error { print(error) }
             self.hasAccess = granted ? true : false
         })
+        return nil
     }
 
     func getDefaultList() -> String? {
@@ -33,11 +33,11 @@ class Reminders {
         if let id = id { calendar = [eventStore.calendar(withIdentifier: id) ?? EKCalendar()] }
         let predicate: NSPredicate? = eventStore.predicateForReminders(in: calendar)
         if let predicate = predicate {
-            eventStore.fetchReminders(matching: predicate) { (_ reminders: [Any]?) -> Void in 
+            eventStore.fetchReminders(matching: predicate) { (_ reminders: [Any]?) -> Void in
             let rems = reminders as? [EKReminder] ?? [EKReminder]()
             let result = rems.map { Reminder(reminder: $0) }
             let json = try? JSONEncoder().encode(result)
-            completion(String(data: json ?? Data(), encoding: .utf8))      
+            completion(String(data: json ?? Data(), encoding: .utf8))
             }
         }
     }
@@ -45,8 +45,8 @@ class Reminders {
     func saveReminder(_ json: [String: Any], _ completion: @escaping(String?) -> ()) {
         let reminder: EKReminder
 
-        guard json["list"] != nil, 
-            let calendarID: String = json["list"] as? String, 
+        guard json["list"] != nil,
+            let calendarID: String = json["list"] as? String,
             let list: EKCalendar = eventStore.calendar(withIdentifier: calendarID) else {
                 return completion("Invalid calendarID")
         }
@@ -96,7 +96,7 @@ struct Reminder : Codable {
     let id: String
     let title: String
     let dueDate: DateComponents?
-    let priority: Int 
+    let priority: Int
     let isCompleted: Bool
     let notes: String?
 
