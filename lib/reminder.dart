@@ -5,6 +5,7 @@ class Reminder {
   String? id;
   String title;
   DateTime? dueDate;
+  DateTime? completionDate;
   int priority;
   bool isCompleted;
   String? notes;
@@ -14,6 +15,7 @@ class Reminder {
       this.id,
       required this.title,
       this.dueDate,
+      this.completionDate,
       this.priority = 0,
       this.isCompleted = false,
       this.notes});
@@ -28,6 +30,12 @@ class Reminder {
     if (json['dueDate'] != null) {
       final date = json['dueDate'];
       dueDate = DateTime(date['year']!, date['month']!, date['day']!,
+          date['hour'] ?? 00, date['minute'] ?? 00, date['second'] ?? 00);
+    }
+
+    if (json['completionDate'] != null) {
+      final date = json['completionDate'];
+      completionDate = DateTime(date['year']!, date['month']!, date['day']!,
           date['hour'] ?? 00, date['minute'] ?? 00, date['second'] ?? 00);
     }
   }
@@ -46,6 +54,16 @@ class Reminder {
                 'minute': dueDate?.minute,
                 'second': dueDate?.second,
               },
+        'completionDate': completionDate == null
+            ? null
+            : {
+          'year': completionDate?.year,
+          'month': completionDate?.month,
+          'day': completionDate?.day,
+          'hour': completionDate?.hour,
+          'minute': completionDate?.minute,
+          'second': completionDate?.second,
+        },
         'priority': priority,
         'isCompleted': isCompleted,
         'notes': notes

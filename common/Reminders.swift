@@ -96,6 +96,7 @@ struct Reminder : Codable {
     let id: String
     let title: String
     let dueDate: DateComponents?
+    let completionDate: DateComponents?
     let priority: Int
     let isCompleted: Bool
     let notes: String?
@@ -104,7 +105,8 @@ struct Reminder : Codable {
         self.list = List(list: reminder.calendar)
         self.id = reminder.calendarItemIdentifier
         self.title = reminder.title
-        self.dueDate = reminder.completionDate == nil ? reminder.dueDateComponents : Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: reminder.completionDate!)
+        self.dueDate = reminder.dueDateComponents
+        self.completionDate = reminder.completionDate == nil ? nil : Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: reminder.completionDate!)
         self.priority = reminder.priority
         self.isCompleted = reminder.isCompleted
         self.notes = reminder.notes
